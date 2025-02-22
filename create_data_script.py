@@ -5,36 +5,23 @@
 import numpy as np
 import pandas as pd
 
-# Number of observations (days)
-n = 200
+# Number of observations (individuals)
+n = 300
 
-# Generate independent variables (predictors) with controlled distributions
-temperature = np.random.normal(20, 5, n)  # Normally distributed temperature (Celsius)
-humidity = np.random.uniform(30, 90, n)  # Uniformly distributed humidity (%)
-wind_speed = np.random.normal(15, 3, n)  # Normally distributed wind speed (km/h)
-wind_speed = np.maximum(wind_speed, 0) # Ensure no negative wind speeds
-pressure = np.random.normal(1013, 5, n) #Normally distributed pressure (hPa)
+# Generate independent variable (education level) with controlled distribution
+education_years = np.random.normal(14, 2, n)  # Normally distributed years of education (mean 14, std 2)
+education_years = np.maximum(education_years, 8) # Ensure a minimum of 8 years.
 
-# Generate the dependent variable (rainfall) with controlled linearity and homoscedasticity
-true_coefficients = np.array([5, 0.2, -0.1, 0.05, -0.01])  # True coefficients for the linear model
-error_sd = 2  # Standard deviation of the error term (for homoscedasticity)
+# Generate the dependent variable (salary) with controlled linearity and homoscedasticity
+true_intercept = 30000
+true_slope = 5000
+error_sd = 10000  # Standard deviation of the error term (for homoscedasticity)
 
 # Create a linear combination of predictors and add normally distributed errors
-rainfall = (true_coefficients[0] +
-            true_coefficients[1] * temperature +
-            true_coefficients[2] * humidity +
-            true_coefficients[3] * wind_speed +
-            true_coefficients[4] * pressure +
-            np.random.normal(0, error_sd, n))
-rainfall = np.maximum(rainfall, 0) # Ensure no negative rainfall.
+salary = true_intercept + true_slope * education_years + np.random.normal(0, error_sd, n)
+salary = np.maximum(salary, 20000) # Ensure a minimum salary
 
 # Create a pandas DataFrame
-weather_data = pd.DataFrame({
-    'rainfall': rainfall,
-    'temperature': temperature,
-    'humidity': humidity,
-    'wind_speed': wind_speed,
-    'pressure': pressure
-})
+salary_data = pd.DataFrame({'education_years': education_years, 'salary': salary})
 
-print(weather_data.head())
+print(salary_data.head())

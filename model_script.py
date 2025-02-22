@@ -17,6 +17,10 @@ print(salary_data.describe())
 plt.figure(figsize = (10,6))
 sns.scatterplot(x='education_years', y='salary', data = salary_data, color = 'blue')
 sns.regplot(x='education_years', y='salary', data = salary_data, scatter=False)
+
+plt.xlabel('Years of Education')
+plt.ylabel('Salary')
+
 plt.show()
 
 # Splitting data into test and train

@@ -60,3 +60,27 @@ x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, rando
 lm = LinearRegression()
 lm.fit(x_train, y_train)
 ```
+Looking model metrics of our trained linear regression model. Creating predictions and looking at model performance with mean absolute error, mean squared error, and R-squared.
+```python
+# Looking at R-squared for trained model
+lm.score(x_train, y_train)
+
+# Look at coefficient 
+lm.coef_
+
+# Look at intercept
+lm.intercept_
+
+# Creating model predictions
+y_predictions = lm.predict(x_test)
+
+# Evaluating model performance
+# MAE
+mean_absolute_error(y_test, y_predictions)
+
+# MSE
+mean_squared_error(y_test, y_predictions)
+
+# R-squared
+r2_score(y_test, y_predictions)
+```

@@ -1,6 +1,8 @@
 ### Scott Schumacker
 ### Machine Learning: Linear Regression model (Python)
 
+This project will show an example machine learning linear regression model using a fake data set created around years of education and associated salary.
+
 Importing packages
 ```python
 import numpy as np
@@ -12,7 +14,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 ```
 
-Creating data set
+***Creating a data set***
+<br>
+For this example linear regression model, we will create our own data set:
 ```python
 # Number of observations (individuals)
 n = 300
@@ -36,7 +40,8 @@ salary_data = pd.DataFrame({'education_years': education_years, 'salary': salary
 print(salary_data.head())
 ```
 
-Creating a plot to visualize the linear relationship between Years of Education and Salary.
+***Visualizing linear relationship***
+<br>
 ```python
 # Creating plot to show linear regression
 plt.figure(figsize = (10,6))
@@ -48,19 +53,26 @@ plt.ylabel('Salary')
 
 plt.show()
 ```
-Splitting the data into training and test data sets and fitting the linear model
+There appears to be a positive linear relationship between years of education and salary.
+
+***Splitting the data set into training and testing data***
+<br>
 ```python
 # Splitting data into test and train
 x = salary_data[['education_years']]
 y = salary_data[['salary']]
 
 x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 15)
-
+```
+***Fitting and training the model***
+<br>
+```python
 # Fitting model
 lm = LinearRegression()
 lm.fit(x_train, y_train)
 ```
-Looking model metrics of our trained linear regression model. Creating predictions and looking at model performance with mean absolute error, mean squared error, and R-squared.
+***Evaluating model metrics***
+<br>
 ```python
 # Looking at R-squared for trained model
 lm.score(x_train, y_train)

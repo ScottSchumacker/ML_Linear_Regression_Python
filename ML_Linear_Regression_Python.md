@@ -35,3 +35,28 @@ salary_data = pd.DataFrame({'education_years': education_years, 'salary': salary
 
 print(salary_data.head())
 ```
+
+Creating a plot to visualize the linear relationship between Years of Education and Salary.
+```python
+# Creating plot to show linear regression
+plt.figure(figsize = (10,6))
+sns.scatterplot(x='education_years', y='salary', data = salary_data, color = 'blue')
+sns.regplot(x='education_years', y='salary', data = salary_data, scatter=False)
+
+plt.xlabel('Years of Education')
+plt.ylabel('Salary')
+
+plt.show()
+```
+Splitting the data into training and test data sets and fitting the linear model
+```python
+# Splitting data into test and train
+x = salary_data[['education_years']]
+y = salary_data[['salary']]
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size = 0.2, random_state = 15)
+
+# Fitting model
+lm = LinearRegression()
+lm.fit(x_train, y_train)
+```
